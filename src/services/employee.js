@@ -3,20 +3,24 @@ const EmployeeModel = require('$src/db/models/employee');
 const Service = require('$src/services/service');
 
 class EmployeeService extends Service {
-  static model = EmployeeModel;
-
-  static get(id) {
-    return EmployeeModel.query()
+  get(id) {
+    return this.model.query()
       .modify('fields')
       .withGraphFetched('department(fields).city')
       .findById(id);
   }
 
-  static getAll(params = {}) {
-    return EmployeeModel.query()
+  getAll(params = {}) {
+    return this.model.query()
       .modify('fields')
       .withGraphFetched('department(fields).city');
   }
 }
 
-module.exports = EmployeeService;
+function createEmployeeService(model) {
+  return new EmployeeService(model);
+}
+
+exports.createEmployeeService = createEmployeeService;
+
+exports.EmployeeService = createEmployeeService(EmployeeModel);

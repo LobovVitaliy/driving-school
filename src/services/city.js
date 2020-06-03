@@ -2,8 +2,12 @@ const CityModel = require('$src/db/models/city');
 
 const Service = require('$src/services/service');
 
-class CityService extends Service {
-  static model = CityModel;
+class CityService extends Service {}
+
+function createCityService(model) {
+  return new CityService(model);
 }
 
-module.exports = CityService;
+exports.createCityService = createCityService;
+
+exports.CityService = createCityService(CityModel);

@@ -1,21 +1,25 @@
 class Service {
-  static create(payload) {
+  constructor(model) {
+    this.model = model;
+  }
+
+  create(payload) {
     return this.model.query().insert(payload);
   }
 
-  static update(id, payload) {
+  update(id, payload) {
     return this.model.query().patchAndFetchById(id, payload);
   }
 
-  static delete(id) {
+  delete(id) {
     return this.model.query().deleteById(id).returning('*');
   }
 
-  static get(id) {
+  get(id) {
     return this.model.query().findById(id);
   }
 
-  static getAll(params = {}) {
+  getAll(params = {}) {
     return this.model.query();
   }
 }

@@ -1,6 +1,6 @@
 const { badRequest } = require('@hapi/boom');
 
-const InterviewService = require('$src/services/interview');
+const { InterviewService } = require('$src/services/interview');
 
 module.exports = [
   {

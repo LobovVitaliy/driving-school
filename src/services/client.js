@@ -2,8 +2,12 @@ const ClientModel = require('$src/db/models/client');
 
 const Service = require('$src/services/service');
 
-class ClientService extends Service {
-  static model = ClientModel;
+class ClientService extends Service {}
+
+function createClientService(model) {
+  return new ClientService(model);
 }
 
-module.exports = ClientService;
+exports.createClientService = createClientService;
+
+exports.ClientService = createClientService(ClientModel);

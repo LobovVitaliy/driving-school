@@ -1,6 +1,6 @@
 const { badRequest } = require('@hapi/boom');
 
-const CityService = require('$src/services/city');
+const { CityService } = require('$src/services/city');
 
 module.exports = [
   {

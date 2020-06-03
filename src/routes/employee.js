@@ -1,6 +1,6 @@
 const { badRequest } = require('@hapi/boom');
 
-const EmployeeService = require('$src/services/employee');
+const { EmployeeService } = require('$src/services/employee');
 
 module.exports = [
   {
