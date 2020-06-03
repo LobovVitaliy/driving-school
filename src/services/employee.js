@@ -1,17 +1,9 @@
 const EmployeeModel = require('$src/db/models/employee');
 
-class EmployeeService {
-  static create(payload) {
-    return EmployeeModel.query().insert(payload);
-  }
+const Service = require('$src/services/service');
 
-  static update(id, payload) {
-    return EmployeeModel.query().patchAndFetchById(id, payload);
-  }
-
-  static delete(id) {
-    return EmployeeModel.query().deleteById(id).returning('*');
-  }
+class EmployeeService extends Service {
+  static model = EmployeeModel;
 
   static get(id) {
     return EmployeeModel.query()

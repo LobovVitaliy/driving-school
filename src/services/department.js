@@ -1,17 +1,9 @@
 const DepartmentModel = require('$src/db/models/department');
 
-class DepartmentService {
-  static create(payload) {
-    return DepartmentModel.query().insert(payload);
-  }
+const Service = require('$src/services/service');
 
-  static update(id, payload) {
-    return DepartmentModel.query().patchAndFetchById(id, payload);
-  }
-
-  static delete(id) {
-    return DepartmentModel.query().deleteById(id).returning('*');
-  }
+class DepartmentService extends Service {
+  static model = DepartmentModel;
 
   static get(id) {
     return DepartmentModel.query()
