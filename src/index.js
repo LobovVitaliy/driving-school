@@ -1,4 +1,5 @@
 require('$src/configs/init');
+require('$src/db/models/init');
 
 const Hapi = require('@hapi/hapi');
 

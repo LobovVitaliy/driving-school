@@ -1,24 +1,28 @@
-const CRUD = require('$src/db/models/crud');
+const { Model } = require('objection');
 
-class Employee {
-  constructor(data) {
-    this.id = data.id;
-    this.department_id = data.department_id;
-    this.name = data.name;
-    this.phone = data.phone;
-    this.position = data.position;
-    this.password = data.password;
-    this.number = data.number;
-    this.age = data.age;
+const DepartmentModel = require('$src/db/models/department');
+
+class EmployeeModel extends Model {
+  static tableName = 'employee';
+
+  static get modifiers() {
+    return {
+      fields(builder) {
+        builder.select('id', 'name', 'phone', 'position', 'password', 'number', 'age');
+      },
+    };
   }
+
+  static relationMappings = {
+    department: {
+      relation: Model.BelongsToOneRelation,
+      modelClass: DepartmentModel,
+      join: {
+        from: 'employee.department_id',
+        to: 'department.id',
+      },
+    },
+  };
 }
 
-class EmployeeModel extends CRUD {
-  constructor() {
-    super('employee', Employee);
-  }
-}
-
-module.exports.Employee = Employee;
-
-module.exports = new EmployeeModel();
+module.exports = EmployeeModel;

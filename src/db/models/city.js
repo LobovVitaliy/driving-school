@@ -1,18 +1,7 @@
-const CRUD = require('$src/db/models/crud');
+const { Model } = require('objection');
 
-class City {
-  constructor(data) {
-    this.id = data.id;
-    this.name = data.name;
-  }
+class CityModel extends Model {
+  static tableName = 'city';
 }
 
-class CityModel extends CRUD {
-  constructor() {
-    super('city', City);
-  }
-}
-
-module.exports.City = City;
-
-module.exports = new CityModel();
+module.exports = CityModel;

@@ -1,19 +1,28 @@
-const CRUD = require('$src/db/models/crud');
+const { Model } = require('objection');
 
-class Department {
-  constructor(data) {
-    this.id = data.id;
-    this.city_id = data.city_id;
-    this.address = data.address;
+const CityModel = require('$src/db/models/city');
+
+class DepartmentModel extends Model {
+  static tableName = 'department';
+
+  static get modifiers() {
+    return {
+      fields(builder) {
+        builder.select('id', 'address');
+      },
+    };
   }
+
+  static relationMappings = {
+    city: {
+      relation: Model.BelongsToOneRelation,
+      modelClass: CityModel,
+      join: {
+        from: 'department.city_id',
+        to: 'city.id',
+      },
+    },
+  };
 }
 
-class DepartmentModel extends CRUD {
-  constructor() {
-    super('department', Department);
-  }
-}
-
-module.exports.Department = Department;
-
-module.exports = new DepartmentModel();
+module.exports = DepartmentModel;
